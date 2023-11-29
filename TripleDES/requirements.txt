@@ -1,0 +1,5 @@
+DES3
+streamlit
+pycryptodome
+
+
