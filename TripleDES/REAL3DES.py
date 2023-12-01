@@ -78,7 +78,7 @@ def encrypt_page():
     st.write("Masukkan kalimat yang akan dienkripsi:")
 
     message = st.text_input("Kalimat:")
-    key = st.text_input("Kata Kunci Enkripsi:")
+    key = st.text_input("Kata Kunci Enkripsi (Panjang: 9-24) :")
     mode = st.selectbox("Pilih Mode Enkripsi:", ['EEE', 'EDE'])
 
     if st.button("Enkripsi"):
@@ -94,7 +94,7 @@ def decrypt_page():
     st.write("Masukkan kalimat yang akan didekripsi:")
 
     message = st.text_input("Kalimat Terenkripsi:")
-    key = st.text_input("Kata Kunci Enkripsi:")
+    key = st.text_input("Kata Kunci Enkripsi (Panjang: 9-24) :")
     mode = st.selectbox("Pilih Mode Dekripsi:", ['EEE', 'EDE'])
 
     if st.button("Dekripsi"):
