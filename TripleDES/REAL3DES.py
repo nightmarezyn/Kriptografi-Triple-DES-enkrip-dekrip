@@ -29,14 +29,9 @@ def triple_des_encrypt(message, key, mode='EEE'):
         encrypted_message = cipher.encrypt(padded_message.encode())
         encrypted_message = cipher.decrypt(encrypted_message)
         encrypted_message = cipher.encrypt(encrypted_message)
-    elif mode == 'DED':
-        # Dekripsi, enkripsi, dan dekripsi kembali
-        encrypted_message = cipher.decrypt(padded_message.encode())
-        encrypted_message = cipher.encrypt(encrypted_message)
-        encrypted_message = cipher.decrypt(encrypted_message)
     else:
         # Mode tidak valid
-        raise ValueError("Mode harus 'EEE', 'EDE', atau 'DED'")
+        raise ValueError("Mode harus 'EEE' atau 'EDE'")
     
     encoded_message = base64.b64encode(encrypted_message).decode()
     return encoded_message
@@ -56,14 +51,9 @@ def triple_des_decrypt(encoded_message, key, mode='EEE'):
         decrypted_message = cipher.decrypt(encrypted_message)
         decrypted_message = cipher.encrypt(decrypted_message)
         decrypted_message = cipher.decrypt(decrypted_message)
-    elif mode == 'DED':
-        # Enkripsi, dekripsi, dan enkripsi kembali
-        decrypted_message = cipher.encrypt(encrypted_message)
-        decrypted_message = cipher.decrypt(decrypted_message)
-        decrypted_message = cipher.decrypt(decrypted_message)
     else:
         # Mode tidak valid
-        raise ValueError("Mode harus 'EEE', 'EDE', atau 'DED'")
+        raise ValueError("Mode harus 'EEE' atau 'EDE'")
     
     decrypted_message = decrypted_message.decode()
     return decrypted_message
@@ -89,7 +79,7 @@ def encrypt_page():
 
     message = st.text_input("Kalimat:")
     key = st.text_input("Kata Kunci Enkripsi:")
-    mode = st.selectbox("Pilih Mode Enkripsi:", ['EEE', 'EDE', 'DED'])
+    mode = st.selectbox("Pilih Mode Enkripsi:", ['EEE', 'EDE'])
 
     if st.button("Enkripsi"):
         if not message or not key:
@@ -105,7 +95,7 @@ def decrypt_page():
 
     message = st.text_input("Kalimat Terenkripsi:")
     key = st.text_input("Kata Kunci Enkripsi:")
-    mode = st.selectbox("Pilih Mode Dekripsi:", ['EEE', 'EDE', 'DED'])
+    mode = st.selectbox("Pilih Mode Dekripsi:", ['EEE', 'EDE'])
 
     if st.button("Dekripsi"):
         if not message or not key:
