@@ -60,7 +60,7 @@ def triple_des_decrypt(encoded_message, key, mode='EEE'):
 
 # Home page
 def home_page():
-    st.title("🏡 Home")
+    st.title("🔐 Triple DES Encrypt-Decrypt ✨")
     st.markdown("""
         Selamat datang di aplikasi enkripsi dan dekripsi menggunakan algoritma Triple DES. Pilih menu di sebelah kiri untuk mulai.
     """)
@@ -71,7 +71,6 @@ def home_page():
             Algoritma ini melakukan enkripsi tiga kali pada blok data yang sama menggunakan tiga kunci yang berbeda. Triple DES memperoleh keamanan tambahan dengan panjang kunci yang lebih besar (168 bit).
         """)
 
-# Encryption page
 # Encryption page
 def encrypt_page():
     st.title("🔒 Enkripsi")
@@ -106,7 +105,7 @@ def decrypt_page():
 
 # About Us page
 def about_us_page():
-    st.title("👨‍💻 About Us 👨‍💻")
+    st.title("👨🏻‍💻 About Us 👩🏻‍💻")
     st.markdown("""
         Kami adalah tim pengembang yang menciptakan aplikasi ini untuk keperluan enkripsi dan dekripsi menggunakan algoritma Triple DES.
 
