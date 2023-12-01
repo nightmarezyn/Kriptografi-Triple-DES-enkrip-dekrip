@@ -11,9 +11,13 @@ st.set_page_config(
 )
 
 # Define functions for encryption and decryption
-def triple_des_encrypt(message, key, mode='EEE'):
-    key = key.ljust(24)  # Pastikan panjang kunci sesuai (24 byte)
-    cipher = DES3.new(key.encode(), DES3.MODE_ECB)
+def triple_des_encrypt(message, key, key2, key3, mode='EEE'):
+    key = key.ljust(24)  # Pastikan panjang kunci pertama sesuai (24 byte)
+    key2 = key2.ljust(24) # Pastikan panjang kunci kedua sesuai (24 byte)
+    key3 = key3.ljust(24) # Pastikan panjang kunci ketiga sesuai (24 byte)
+    cipher1 = DES3.new(key.encode(), DES3.MODE_ECB)
+    cipher2 = DES3.new(key2.encode(), DES3.MODE_ECB)
+    cipher3 = DES3.new(key3.encode(), DES3.MODE_ECB)
     
     # Sesuaikan panjang pesan agar sesuai dengan blok kunci
     block_size = 8
@@ -21,14 +25,14 @@ def triple_des_encrypt(message, key, mode='EEE'):
     
     if mode == 'EEE':
         # Enkripsi tiga kali secara berturut-turut
-        encrypted_message = cipher.encrypt(padded_message.encode())
-        encrypted_message = cipher.encrypt(encrypted_message)
-        encrypted_message = cipher.encrypt(encrypted_message)
+        encrypted_message = cipher1.encrypt(padded_message.encode())
+        encrypted_message = cipher2.encrypt(encrypted_message)
+        encrypted_message = cipher3.encrypt(encrypted_message)
     elif mode == 'EDE':
         # Enkripsi, dekripsi, dan enkripsi kembali
-        encrypted_message = cipher.encrypt(padded_message.encode())
-        encrypted_message = cipher.decrypt(encrypted_message)
-        encrypted_message = cipher.encrypt(encrypted_message)
+        encrypted_message = cipher1.encrypt(padded_message.encode())
+        encrypted_message = cipher2.decrypt(encrypted_message)
+        encrypted_message = cipher3.encrypt(encrypted_message)
     else:
         # Mode tidak valid
         raise ValueError("Mode harus 'EEE' atau 'EDE'")
@@ -36,21 +40,25 @@ def triple_des_encrypt(message, key, mode='EEE'):
     encoded_message = base64.b64encode(encrypted_message).decode()
     return encoded_message
 
-def triple_des_decrypt(encoded_message, key, mode='EEE'):
-    key = key.ljust(24)  # Pastikan panjang kunci sesuai (24 byte)
-    cipher = DES3.new(key.encode(), DES3.MODE_ECB)
+def triple_des_decrypt(encoded_message, key, key2, key3, mode='EEE'):
+    key = key.ljust(24)  # Pastikan panjang kunci pertama sesuai (24 byte)
+    key2 = key2.ljust(24) # Pastikan panjang kunci kedua sesuai (24 byte)
+    key3 = key3.ljust(24) # Pastikan panjang kunci ketiga sesuai (24 byte)
+    cipher1 = DES3.new(key.encode(), DES3.MODE_ECB)
+    cipher2 = DES3.new(key2.encode(), DES3.MODE_ECB)
+    cipher3 = DES3.new(key3.encode(), DES3.MODE_ECB)
     encrypted_message = base64.b64decode(encoded_message)
     
     if mode == 'EEE':
         # Dekripsi tiga kali secara berturut-turut
-        decrypted_message = cipher.decrypt(encrypted_message)
-        decrypted_message = cipher.decrypt(decrypted_message)
-        decrypted_message = cipher.decrypt(decrypted_message)
+        decrypted_message = cipher3.decrypt(encrypted_message)
+        decrypted_message = cipher2.decrypt(decrypted_message)
+        decrypted_message = cipher1.decrypt(decrypted_message)
     elif mode == 'EDE':
         # Dekripsi, enkripsi, dan dekripsi kembali
-        decrypted_message = cipher.decrypt(encrypted_message)
-        decrypted_message = cipher.encrypt(decrypted_message)
-        decrypted_message = cipher.decrypt(decrypted_message)
+        decrypted_message = cipher3.decrypt(encrypted_message)
+        decrypted_message = cipher2.encrypt(decrypted_message)
+        decrypted_message = cipher1.decrypt(decrypted_message)
     else:
         # Mode tidak valid
         raise ValueError("Mode harus 'EEE' atau 'EDE'")
@@ -77,14 +85,16 @@ def encrypt_page():
     st.write("Masukkan kalimat yang akan dienkripsi:")
 
     message = st.text_input("Kalimat:")
-    key = st.text_input("Kata Kunci Enkripsi (Panjang: 9-24) :")
+    key = st.text_input("Kata Kunci Enkripsi Pertama (Panjang: 9-24) :")
+    key2 = st.text_input("Kata Kunci Enkripsi Kedua (Panjang: 9-24) :")
+    key3 = st.text_input("Kata Kunci Enkripsi Ketiga (Panjang: 9-24) :")
     mode = st.selectbox("Pilih Mode Enkripsi:", ['EEE', 'EDE'])
 
     if st.button("Enkripsi"):
-        if not message or not key:
-            st.warning("Masukkan kalimat dan kunci enkripsi terlebih dahulu.")
+        if not message or not key or not key2 or not key3:
+            st.warning("Masukkan kalimat dan ketiga kunci enkripsi terlebih dahulu.")
         else:
-            encrypted_message = triple_des_encrypt(message, key, mode)
+            encrypted_message = triple_des_encrypt(message, key, key2, key3, mode)
             st.success(f"Hasil enkripsi kalimat input adalah:\n{encrypted_message}")
 
 # Decryption page
@@ -93,14 +103,16 @@ def decrypt_page():
     st.write("Masukkan kalimat yang akan didekripsi:")
 
     message = st.text_input("Kalimat Terenkripsi:")
-    key = st.text_input("Kata Kunci Enkripsi (Panjang: 9-24) :")
+    key = st.text_input("Kata Kunci Enkripsi Pertama (Panjang: 9-24) :")
+    key2 = st.text_input("Kata Kunci Enkripsi Kedua (Panjang: 9-24) :")
+    key3 = st.text_input("Kata Kunci Enkripsi Ketiga (Panjang: 9-24) :")
     mode = st.selectbox("Pilih Mode Dekripsi:", ['EEE', 'EDE'])
 
     if st.button("Dekripsi"):
-        if not message or not key:
-            st.warning("Masukkan kalimat terenkripsi dan kunci enkripsi terlebih dahulu.")
+        if not message or not key or not key2 or not key3:
+            st.warning("Masukkan kalimat terenkripsi dan ketiga kunci enkripsi terlebih dahulu.")
         else:
-            decrypted_message = triple_des_decrypt(message, key, mode)
+            decrypted_message = triple_des_decrypt(message, key, key2, key3, mode)
             st.success(f"Hasil dekripsi dari kalimat terenkripsi adalah:\n{decrypted_message}")
 
 # About Us page
