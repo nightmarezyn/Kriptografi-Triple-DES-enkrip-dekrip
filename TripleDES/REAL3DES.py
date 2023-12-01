@@ -105,11 +105,10 @@ def decrypt_page():
 
 # About Us page
 def about_us_page():
-    st.title("👨🏻‍💻 About Us 👩🏻‍💻")
+    st.title("👨🏻‍💻 About Us: Group 2 👩🏻‍💻")
     st.markdown("""
         Kami adalah tim pengembang yang menciptakan aplikasi ini untuk keperluan enkripsi dan dekripsi menggunakan algoritma Triple DES.
         
-        Kelompok 2
         Anggota Tim:
         - 2210511044	Rahman Ilyas Al Kahfi
         - 2210511051	Salwa Nafisa
