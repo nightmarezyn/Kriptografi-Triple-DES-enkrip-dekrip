@@ -83,7 +83,8 @@ def home_page():
     with st.expander("EEE (Encrypt, Encrypt, Encrypt)"):
         st.markdown("""
         Pada mode ini, teks terbuka dienkripsi tiga kali secara berurutan menggunakan kunci yang berbeda pada setiap langkah.
-        Misalnya, jika kita menyebut kunci pertama sebagai K1, kunci kedua sebagai K2, dan kunci ketiga sebagai K3, maka proses enkripsi akan seperti berikut:
+        Misalnya, jika kita menyebut kunci pertama sebagai K1, kunci kedua sebagai K2, dan kunci ketiga sebagai K3, 
+        maka proses enkripsi akan seperti berikut:
         CipherText = Encrypt(K1, Encrypt(K2, Encrypt(K3, PlainText)))
         """)
 
@@ -91,7 +92,8 @@ def home_page():
     with st.expander("EDE (Encrypt, Decrypt, Encrypt)"):
         st.markdown("""
         Pada mode ini, teks terbuka dienkripsi, kemudian didekripsi, dan akhirnya dienkripsi lagi.
-        Misalnya, jika kita menyebut kunci pertama sebagai K1, kunci kedua sebagai K2, dan kunci ketiga sebagai K3, maka proses enkripsi-dekripsi-enkripsi akan seperti berikut:
+        Misalnya, jika kita menyebut kunci pertama sebagai K1, kunci kedua sebagai K2, dan kunci ketiga sebagai K3, 
+        maka proses enkripsi-dekripsi-enkripsi akan seperti berikut:
         CipherText = Encrypt(K1, Decrypt(K2, Encrypt(K3, PlainText)))
         """)
 
