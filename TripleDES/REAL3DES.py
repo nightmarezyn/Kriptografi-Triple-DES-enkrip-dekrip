@@ -72,7 +72,7 @@ def home_page():
     st.markdown("""
         Selamat datang di aplikasi enkripsi dan dekripsi menggunakan algoritma Triple DES. 
         
-        **👈🏻👈🏻👈🏻 Pilih menu di sebelah kiri untuk mulai.**
+        **👈🏻 Pilih menu di sebelah kiri untuk mulai**
     """)
 
     with st.expander("Definisi Triple DES"):
