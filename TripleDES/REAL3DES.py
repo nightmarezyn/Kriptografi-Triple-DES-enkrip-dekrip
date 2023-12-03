@@ -70,7 +70,9 @@ def triple_des_decrypt(encoded_message, key, key2, key3, mode='EEE'):
 def home_page():
     st.title("🔐 Triple DES Encrypt-Decrypt ✨")
     st.markdown("""
-        Selamat datang di aplikasi enkripsi dan dekripsi menggunakan algoritma Triple DES. Pilih menu di sebelah kiri untuk mulai.
+        Selamat datang di aplikasi enkripsi dan dekripsi menggunakan algoritma Triple DES. 
+        
+        **👈🏻👈🏻👈🏻 Pilih menu di sebelah kiri untuk mulai.**
     """)
 
     with st.expander("Definisi Triple DES"):
