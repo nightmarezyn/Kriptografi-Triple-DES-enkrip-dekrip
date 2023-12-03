@@ -108,7 +108,7 @@ def home_page():
 # Encryption page
 def encrypt_page():
     st.title("🔒 :blue[Enkripsi]")
-    st.write("Masukkan kalimat yang akan dienkripsi:")
+    st.write("**Masukkan kalimat yang akan dienkripsi:**")
 
     message = st.text_input("Kalimat:")
     key = st.text_input("Kata Kunci Enkripsi Pertama (Panjang: 9-24) :")
@@ -126,7 +126,7 @@ def encrypt_page():
 # Decryption page
 def decrypt_page():
     st.title("🔓 :orange[Dekripsi]")
-    st.write("Masukkan kalimat yang akan didekripsi:")
+    st.write("**Masukkan kalimat yang akan didekripsi:**")
 
     message = st.text_input("Kalimat Terenkripsi:")
     key = st.text_input("Kata Kunci Enkripsi Pertama (Panjang: 9-24) :")
