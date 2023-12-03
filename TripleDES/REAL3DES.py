@@ -68,7 +68,7 @@ def triple_des_decrypt(encoded_message, key, key2, key3, mode='EEE'):
 
 # Home page
 def home_page():
-    st.title("🔐 :purple[Triple DES] Encrypt-Decrypt ✨")
+    st.title("🔐 Triple DES Encrypt-Decrypt ✨")
     st.markdown("""
         Selamat datang di aplikasi enkripsi dan dekripsi menggunakan algoritma Triple DES. Pilih menu di sebelah kiri untuk mulai.
     """)
@@ -123,7 +123,7 @@ def encrypt_page():
 
 # Decryption page
 def decrypt_page():
-    st.title("🔓 :red[Dekripsi]")
+    st.title("🔓 :orange[Dekripsi]")
     st.write("Masukkan kalimat yang akan didekripsi:")
 
     message = st.text_input("Kalimat Terenkripsi:")
